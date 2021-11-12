@@ -68,7 +68,6 @@ const createIndex = async function ({ server, config, index, mappings, alarmInde
 
     let body = {
       mappings: {
-        [config.es.default_type]: {
           properties: updateMappingTypes({
             mappings,
             watcherType: config.es.watcher_type,
@@ -77,14 +76,11 @@ const createIndex = async function ({ server, config, index, mappings, alarmInde
             scriptType: config.es.script_type,
           })
         }
-      }
     };
 
     if (alarmIndex) {
       body = {
-        mappings: {
-          [config.es.alarm_type]: mappings
-        }
+        mappings: mappings
       };
 
       const patternAttributeName = (await client.info()).version.number.startsWith(5) ? 'template' : 'index_patterns';

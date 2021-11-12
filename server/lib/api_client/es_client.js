@@ -228,7 +228,6 @@ export default class EsApi {
 
     const esOptions = {
       id: isAlarm ? id : this._generateId(type, id), // alarm id doesn't contain type prefic for backward compatibility
-      type: isAlarm ? type : this._rootType, // alarm root type is not doc, it is set via config.es.alarm_type for backward compatibility
       index,
       refresh: true,
       body
@@ -260,7 +259,6 @@ export default class EsApi {
     const isAlarm = type === this._config.es.alarm_type;
     const esOptions = {
       id: isAlarm ? id : this._generateId(type, id), // alarm id doesn't contain type prefic for backward compatibility
-      type: isAlarm ? type : this._rootType, // alarm root type is not doc, it is set via config.es.alarm_type for backward compatibility
       index,
       refresh: true,
       ignore: [404],
@@ -287,7 +285,6 @@ export default class EsApi {
   async get(type, id, index) {
     const esOptions = {
       id: this._generateId(type, id),
-      type: this._rootType,
       index,
       ignore: [404]
     };
